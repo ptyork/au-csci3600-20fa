@@ -1,0 +1,28 @@
+﻿@page
+@namespace occam
+@model IndexModel
+
+@*
+@{
+    var name = "John";
+}
+BOOOOO!!
+*@
+<html>
+    <head>
+        <link rel="stylesheet" href="main.css" type="text/css" />
+    </head>
+    <body>
+        <h1>HELLO</h1>
+        <h2>@Model.Name wuz here</h2>
+        <h3>@Model.Name screwed up somehow @(1+1)</h3>
+
+        <ul>
+            @foreach (var peep in Model.Peeps) {
+                var peepl = peep.ToLower();
+
+                <li>@peepl</li>
+            }
+        </ul>
+    </body>
+</html>
