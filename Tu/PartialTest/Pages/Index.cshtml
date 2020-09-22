@@ -1,0 +1,65 @@
+﻿@page
+@model IndexModel
+@using PartialTest.Models
+@{
+    ViewData["Title"] = "Home page";
+}
+@section Scripts {
+}
+
+<table border="1">
+    <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Page Count</th>
+    </tr>
+    @foreach (var book in this.Model.Books)
+    {
+        <tr>
+            <td>@book.ISBN</td>
+            <td>@book.Title</td>
+            <td>@book.Author</td>
+            <td>@book.PageCount pages</td>
+        </tr>
+    }
+</table>
+
+<div class="book-container">
+  @foreach (var book in Model.Books)
+  {
+      ShowBook(book);
+  }
+</div>
+
+<h1>Paul Rocks!!!</h1>
+
+<div class="book-container">
+  @foreach (var book in Model.Books)
+  {
+      Html.RenderPartial("_BookPartial", book);
+      <partial name="_BookPartial" model="book"></partial>
+  }
+</div>
+
+
+
+@functions{
+    private void ShowBook(Book book)
+    {
+        <div class="book">
+            <div class="isbn">
+                @book.ISBN
+            </div>
+            <div class="title">
+                @book.Title
+            </div>
+            <div class="author">
+                @book.Author
+            </div>
+            <div class="page-count">
+                @book.PageCount
+            </div>
+        </div>
+    }
+}
