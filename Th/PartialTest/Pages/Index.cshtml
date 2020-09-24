@@ -1,0 +1,73 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <h1>
+        Students
+    </h1>
+</div>
+
+<div class="stutable">
+    <table border="1">
+        <tr>
+            <th>Student ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Grade</th>
+        </tr>
+        @foreach (var stu in Model.Students)
+        {
+            <tr>
+                <td>@stu.ID</td>
+                <td>@stu.FirstName</td>
+                <td>@stu.LastName</td>
+                <td>@stu.Grade</td>
+                @* <td>&nbsp;</td> *@
+            </tr>
+        }
+    </table>
+</div>
+
+
+<div class="stupanel">
+@foreach (var stu in Model.Students)
+{
+    ShowStudent(stu);
+}
+</div>
+
+
+<div class="stupanel">
+@foreach (var stu in Model.Students)
+{
+    ShowStudent(stu);
+}
+</div>
+
+
+<div class="stupanel">
+@foreach (var stu in Model.Students)
+{
+    //Html.RenderPartial("_StudentPartial", stu);  // ASP.Net Core 2.x OLD JUNK
+    <partial name="_StudentPartial" model="stu"></partial>
+}
+</div>
+
+
+@functions
+{
+    public void ShowStudent(Student stuboy)
+    {
+        <div>
+            <ul>
+                <li>@stuboy.ID</li>
+                <li>@stuboy.FirstName</li>
+                <li>@stuboy.LastName</li>
+                <li>@stuboy.Grade</li>
+            </ul>
+        </div>
+    }
+}
