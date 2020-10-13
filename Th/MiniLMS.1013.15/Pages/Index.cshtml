@@ -1,0 +1,21 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h2>List of Courses</h2>
+
+<ul>
+  @foreach (var course in Model.Courses)
+  {
+    <li>@course.Prefix @course.Number &mdash; @course.Name
+      <ul>
+        @foreach (var sect in course.Sections)
+        {
+          <li>@sect.Semester @sect.SectionLetter -- @sect.Instructor.FullName</li>
+        }
+      </ul>
+    </li>
+  }
+</ul>
