@@ -1,0 +1,60 @@
+﻿@page
+@model MiniLMS.Pages.AssignInstructorModel
+@{
+    ViewData["Title"] = "Section Details";
+
+    var s = Model.Section;
+    var il = Model.Instructors;
+}
+
+
+<table>
+  <tr>
+    <th>
+      Letter
+    </th>
+    <td>
+      @s.SectionLetter
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Semester
+    </th>
+    <td>
+      @s.Semester
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Course Number
+    </th>
+    <td>
+      @s.Course.Prefix @s.Course.Number
+    </td>
+  </tr>
+  <tr>
+    <th>Instructor</th>
+    <td>
+      <form method="post">
+        <select name="InstructorId">
+          <option value="0">Not Assigned</option>
+          @foreach (var inst in Model.Instructors)
+          {
+            if (Model.Section.InstructorId == inst.InstructorId)
+            {
+              <option value="@inst.InstructorId" selected>@inst.FullName</option>
+            }
+            else
+            {
+              <option value="@inst.InstructorId">@inst.FullName</option>
+            }
+          }
+        </select>
+
+        <input type="submit" value="Update" />
+        <input type="hidden" name="SectionId" value="@Model.Section.SectionId" />
+      </form>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,63 @@
+﻿@page
+@model IndexModel
+@{
+  ViewData["Title"] = "Courses";
+}
+
+<h1>
+  List of Courses
+  <a href="./CourseAdd" class="btn btn-primary">Add Course</a>
+</h1>
+
+@foreach (var course in Model.Courses)
+{
+  ShowCourse(course);
+}
+
+@functions
+{
+  // public async Task ShowCourse(MiniLMS.Models.Course course)    // Use this syntax if "awaiting" async methods
+  public void ShowCourse(MiniLMS.Models.Course course)
+  {
+    <div class="course">
+      <h2>
+        @course.Prefix @course.Number &mdash; @course.Name
+        <span class="float-md-right">
+          <span class="btn-group">
+            <a href="./CourseDetails?id=@course.CourseId" class="btn btn-sm btn-info">Details</a>
+            <a href="./CourseEdit?id=@course.CourseId" class="btn btn-sm btn-secondary">Edit</a>
+            <a href="./CourseDelete?id=@course.CourseId" class="btn btn-sm btn-danger">Delete</a>
+          </span>
+          <span class="btn-group">
+            <a href="./CourseAddSection?id=@course.CourseId" class="btn btn-sm btn-info">Add Section</a>
+          </span>
+        </span>
+      </h2>
+      @if (course.Sections?.Count > 0)
+      {
+        <h3>Sections</h3>
+        <ul>
+          @foreach (var sect in course.Sections)
+          {
+            <li>
+              @sect.Semester @sect.SectionLetter
+              @if (sect.Instructor != null)
+              {
+                <text>&mdash; @sect.Instructor.FullName</text>
+              }
+              <span class="btn-group btn-group-sm float-md-right">
+                <a href="./SectionDetails?id=@sect.SectionId" class="btn btn-sm btn-info">Details</a>
+                <a href="./SectionEdit?id=@sect.SectionId" class="btn btn-sm btn-secondary">Edit</a>
+                <a href="./SectionDelete?id=@sect.SectionId" class="btn btn-sm btn-danger">Delete</a>
+              </span>
+            </li>
+          }
+        </ul>
+      }
+      else
+      {
+        <h3>No Sections Defined</h3>
+      }
+    </div>
+  }
+}
