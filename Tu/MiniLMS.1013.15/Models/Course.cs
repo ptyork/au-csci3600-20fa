@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -21,10 +22,12 @@ namespace MiniLMS.Models
         [MinLength(2)]
         [MaxLength(4)]
         [Required]
+        [DisplayName("Pref")]
         public string Prefix { get; set; }
 
         [Range(0, 9999)]
         [Required]
+        [DisplayName("Num")]
         public int Number { get; set; }
 
         [MaxLength(100)]

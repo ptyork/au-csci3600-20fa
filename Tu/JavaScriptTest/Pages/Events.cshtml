@@ -1,0 +1,85 @@
+﻿@page
+@model JavaScriptTest.Pages.EventsModel
+@{
+  ViewData["Title"] = "JavaScript Events";
+}
+
+<script>
+  //var x = false;
+  //if (x == true) {
+  //  var y = "boo";
+  //}
+  //alert(y);
+
+  //var a = false;
+  //if (a == true) {
+  //  let b = "boo";
+  //}
+  //alert(b); // b is out of scope because let is BLOCK scope
+
+  function dostuff() {
+    alert('clicked');
+  }
+
+  document.body.onload = function () {
+
+    var b2 = document.getElementById('button1');
+    b2.onclick = dostuff;
+
+    /** @@type {HTMLButtonElement} */
+    var b3 = document.querySelector('#button2');
+    b3.onclick = function (ev) {
+      //let x = JSON.stringify(ev);
+      //alert(ev.shiftKey);
+      let elem = document.querySelector('#output #buttonClicks');
+      elem.innerHTML += "<li>" + ev.button + "</li>";
+    };
+
+    let output = document.querySelector('#output');
+    output.innerHTML = "<h1>YOU ARE AWESOME</h1>" + output.innerHTML;
+  }
+
+  // alert(globalThis["dostuff"]);
+
+  //dostuff = function () {
+
+  //}
+
+  //dostuff = () => {
+
+  //}
+</script>
+
+
+<p>
+  <button onclick="dostuff();">CLICK ME</button>
+</p>
+<p>
+  <button id="button1">CLICK ME 2</button>
+</p>
+<p>
+  <button id="button2">CLICK ME 3</button>
+</p>
+
+<div id="output">
+  <ul id="buttonClicks">
+  </ul>
+</div>
+<div id="json1"></div>
+<div id="json2"></div>
+
+<script>
+  var jsn = '{ "color": "blue", "size": "large", "belly": "fat", "peeps": ["john", "paul", "george", "not ringo"] }';
+  var obj = { color: 'blue', size: 'large', belly: 'fat', peeps: ['john', 'paul', 'george', 'not ringo'] };
+  var obj2 = JSON.parse(jsn);
+
+  let elem = document.querySelector('#output #buttonClicks');
+  elem.innerHTML += "<li>" + obj.color + " == " + obj2.color + "</li>";
+
+  elem = document.querySelector('#json1');
+  elem.innerHTML = "<pre>" + jsn + "</pre>";
+
+  elem = document.querySelector('#json2');
+  elem.innerHTML = "<pre>" + JSON.stringify(obj) + "</pre>";
+
+</script>
