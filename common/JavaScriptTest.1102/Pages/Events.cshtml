@@ -1,0 +1,53 @@
+﻿@page
+@model JavaScriptTest.Pages.EventsModel
+@{
+  ViewData["Title"] = "Events Tests";
+}
+
+@section Scripts {
+  <script>
+    function hoho() {
+      //alert('ho ho');
+    }
+    window.onclick = hoho;
+
+    document.body.onclick = function (ev) {
+      //alert('he he');
+      //alert(ev.shiftKey);
+    };
+
+    document.body.onload = function () {
+
+      var elem = document.getElementById('cm1');
+      elem.onclick = (bob) => {
+        alert('yo yo');
+        //alert(bob.shiftKey);
+      };
+
+      elem = document.querySelector('#cm2');
+      elem.onclick = (joe) => {
+        alert('bo bo' + joe.ctrlKey);
+      };
+
+    };
+
+
+    var div = document.querySelector('#out');
+    var obj = { size: 'med', price: 1.23, desc: 'big boy pajamas' };
+    div.innerHTML = obj.desc;
+
+    var jsn = '{ "size": "med", "price": 1.23, "desc": "big boy pants" }';
+    var obj2 = JSON.parse(jsn);
+    div.innerHTML += '<p>' + obj2.desc + '</p>';
+    div.innerHTML += JSON.stringify(obj);
+  </script>
+
+}
+
+<h1>Events Testing</h1>
+
+<button id="cm1">CLICK ME 1</button><br />
+<button id="cm2">CLICK ME 2</button>
+
+<div id="out"></div>
+

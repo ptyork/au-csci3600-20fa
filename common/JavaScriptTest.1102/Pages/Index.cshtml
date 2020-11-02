@@ -1,0 +1,135 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Intro to JavaScript";
+}
+
+<script>
+  // Main browser objects
+  //  * document -- visible document in the browser window
+  //  window -- the GUI around the document
+  // navigator -- underlying browser session, history, etc.
+  document.write('Hello World');
+  document.write("Hello World");
+  //alert('BOOM!');
+  window.console.info('Hello World Info');
+  console.debug('DEBUG MESSAGE FROM PAUL');
+
+  var namee = "Paul";
+  //this["namee"] // deosn't exist
+  console.debug(typeof namee);
+  namee = 5.5;
+  console.debug(typeof namee);
+
+  val = namee + 5;
+  //this["val"] // exists
+  console.debug(val);
+  console.debug(typeof val)
+
+
+  var num = 5;
+  console.debug(num);
+  console.debug(typeof num);
+  var num2 = num + 5;
+  console.debug(num2);
+  console.debug(typeof num2);
+
+  var b1 = 'hello' == 'hello';
+  var b2 = 1 == 1;
+  var b3 = 1 == '1';
+  var b4 = '1' == 1;
+  var b5 = 1 === '1';
+
+  console.debug(b1, b2, b3, b4, b5);
+
+  var b6 = '1' != 1;
+  var b7 = 1 !== '1';
+  console.debug(b6, b7);
+
+  x1 = 1;
+  x2 = '1';
+  if (x1 == x2) {
+    console.debug('THEY ARE EQUAL');
+  } else {
+    console.debug('THEY ARE NOT EQUAL');
+  }
+
+  if (x1 === x2) {
+    console.debug('THEY ARE EQUIVALENT')
+  } else {
+    console.debug('THEY ARE NOT EQUIVALENT')
+  }
+
+  if (x1 == x2) {
+    console.debug('THEY ARE EQUAL');
+  } else if (x1 === x2) {
+    console.debug('THEY ARE EQUIVALENT')
+  } else {
+    console.debug('THEY ARE NOT ALIKE');
+  }
+
+  while (true) {
+    console.debug('LOOPEY');
+    break;
+  }
+
+  for (var x = 0; x < 5; x++) {
+    console.debug(x + " is the answer");
+  }
+
+  doit();
+
+  function doit() {
+    document.writeln('DOING IT');
+    document.writeln('DOING IT REAL GOOD');
+  }
+
+  doit();
+
+  function doitwell(name) {
+    document.writeln('DOING IT TO ' + name);
+  }
+
+  doitwell("Paul");
+  doitwell(namee);
+
+  var doit3 = function (pp1) {
+    console.debug(pp1);
+  };
+
+  doit3('lol');
+
+  var doit4 = (pp2) => {
+    console.debug(pp2);
+  };
+
+  doit4('LOL');
+
+  var col = ['a','b',true];
+  for (var x = 0; x < col.length; col++) {
+    console.debug(x + ": " + col[x]);
+  }
+
+  var obj = {};
+
+  obj.car = 'M3';
+  obj["house"] = 'Big old sucker';
+  obj.me = function () {
+    console.debug(this["car"]);
+    console.debug(this.house);
+  };
+
+  obj.me();
+
+
+
+  //console.w.write('Hello world');
+
+</script>
+
+@section Scripts {
+  <script>
+    document.writeln('In scripts hello');
+    document.writeln('In scripts hello 2');
+  </script>
+}

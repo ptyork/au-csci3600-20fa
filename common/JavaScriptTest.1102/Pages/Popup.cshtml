@@ -1,0 +1,66 @@
+﻿@page
+@model JavaScriptTest.Pages.PopupModel
+@{
+  ViewData["Title"] = "Popup Demo Page";
+}
+
+
+<h1>Popup Modal Dialog Demo</h1>
+
+<p>This is a demo of a modal dialog box that we created from scratch.</p>
+
+<p>
+  <button id="test-popup">TEST POPUP</button>
+</p>
+
+<p>
+  <button id="test-showpopup">TEST POPUP JS</button>
+</p>
+
+<div class="myhidden">
+  THIS IS CONTENTS.
+</div>
+
+
+@section Scripts {
+
+  <script src="~/js/popup.js"></script>
+
+  <script>
+    // Page-Specific Scripts
+    // testpopup.onclick = function () {
+    mybutton = document.getElementById('test-popup');
+    mybutton.onclick = function () {
+      // alert("It worked!!");
+      let divs = document.querySelectorAll('.myhidden');
+      if (divs.length == 0) {
+        return;
+      }
+      let myhiddendiv = divs[0];
+      //alert(myhiddendiv.innerHTML);
+
+      let display = myhiddendiv.style.display;
+      myhiddendiv.style.display = (display == "block") ? "none" : "block";
+
+      let left = (window.innerWidth - myhiddendiv.clientWidth) / 2;
+      let top = (window.innerHeight - myhiddendiv.clientHeight) / 2;
+
+      //alert(top + ', ' + left);
+
+      myhiddendiv.style.top = top + 'px';
+      myhiddendiv.style.left = left + 'px';
+    }
+
+    mybutton2 = document.getElementById('test-showpopup');
+    mybutton2.onclick = function () {
+      let popContent = `
+        <h1>Test Modal</h1>
+        <div class="modal-content">
+          TESTING 1...2...3
+        </div>
+      `;
+      showPopup(popContent);
+    };
+
+  </script>
+}

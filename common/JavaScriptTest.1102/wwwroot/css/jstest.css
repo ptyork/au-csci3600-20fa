@@ -1,0 +1,28 @@
+﻿.myhidden {
+    font-weight: bold;
+    font-size: 50pt;
+    /*visibility: hidden;*/
+    display: none;
+    position: absolute;
+    background-color: navy;
+    color: white;
+    width: 50%;
+    text-align: center;
+}
+
+.mymodal {
+    position: absolute;
+    background-color: navy;
+    color: white;
+    width: 50%;
+    text-align: center;
+}
+
+.mycover {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(100,100,100,0.8);
+}
