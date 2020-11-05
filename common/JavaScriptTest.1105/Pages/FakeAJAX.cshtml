@@ -1,0 +1,33 @@
+﻿@page
+@model JavaScriptTest.Pages.FakeAJAXModel
+@{
+
+}
+
+<button id="getsome">Get It</button>
+
+
+@section Scripts {
+<script>
+
+  // getsome = document.getElementById('getsome');  // UNNECESSARY SINCE I USED A JS-FRIENDLY ID FOR THIS
+  getsome.onclick = function () {
+    // Used to use XMLHttpRequest
+    // NOW use fetch
+    fetch("/test_json.json")
+      .then((resp) => {
+        //alert('THEN:' + res.status);
+        // Treat the response as json and call the method that converts it to
+        // a JSON object...also happens to be a promise.
+        return resp.json();
+      })
+      .then((json) => {
+        alert('JSON:' + json.name);
+      })
+      .catch((err) => {
+        alert('CATCH:' + err);
+      });
+  }
+
+</script>
+}

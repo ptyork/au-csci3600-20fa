@@ -1,0 +1,120 @@
+﻿@page
+@model JavaScriptTest.Pages.AnimationModel
+@{
+    ViewData["Title"] = "Animation Test";
+}
+
+@section Head {
+<style>
+  #ball {
+    position: absolute;
+    top: 500px;
+    left: 0;
+  }
+</style>
+}
+
+
+<img src="http://pngimg.com/uploads/pokeball/pokeball_PNG24.png" width="100" height="100" id="ball" />
+
+
+@section Scripts {
+
+ <script>
+
+   // JavaScript code often passes functions around as arguments/parameters.
+
+   function printme(f) {
+     val = f();
+     alert(val);
+   }
+
+   function getname() {
+     return "Paul Is My Name";
+   }
+
+   //printme(getname);
+
+   //printme(function () {
+   //  return "I'm anonymous, I gots no name";
+   //});
+
+   //printme(() => {
+   //  return "I'm an arrow function, I gots no name";
+   //});
+
+   var currLeft = 0;
+   var currAngle = 0;
+
+   // CALLBACK FUNCTIONS
+   // (the old version of asynchronous programming with JS)
+
+   // For example, here's a setTimeout call that enables animation since it's called
+   // every 25 milliseconds. The moveBall function is considered the "callback
+   // function because it's the function that setTimeout calls when it's timeout fires.
+
+   function moveBall() {
+     currLeft = (currLeft + 10) % document.body.clientWidth;
+     currAngle = (currAngle + 10) % 360;
+     ball.style.left = currLeft + 'px';
+     ball.style.transform = 'rotate(' + currAngle + 'deg)';
+     window.setTimeout(moveBall, 25);
+   };
+
+   window.setTimeout(moveBall, 25);
+
+   // PROMISES!!!
+   // (the newer form of asynchronous processing)
+
+   // An asynchronous function will return a promise. The function here is the
+   // code that runs asynchronously. It should eventually either succeed or fail.
+   // The resolve and reject parameters are "magic" values that will be populated
+   // with functions. If your method succeeds, it should call the "resolve" function 
+   // (potentially passing an object). If it fails it should call the reject 
+   // function (likewise potentially passing an error object).
+
+   function gimmePromise() {
+     return new Promise(function (resolve, reject) {
+       if (1 == 1) {
+         //resolve('DONE');
+         // Let's change this up so that the promise resolves after 2 seconds to simulate
+         // a process that should happen asynchronously...note that the ball continues to
+         // roll while the promise waiting for this promised function to be "resolved".
+         setTimeout(resolve, 2000, "DONE");
+       } else {
+         reject('BAD');
+       }
+     });
+   };
+
+   // This function returns a promise object. This object will call it's 
+   // "then" method when it is "done" processing.
+
+   //var x = gimmePromise();
+   //x.then(alert('All Done'));
+
+   function done(val) {
+     alert(val);
+   }
+
+   // Normally, though, the "then" method accepts a function, NOT just a single statement
+
+   //gimmePromise()
+   //  .then(done)
+   //  .catch(done);
+
+   // Most commonly, you use anonymous or arrow functions for these.
+
+   gimmePromise()
+     .then(function (val) {
+       alert('THEN: ' + val);
+     })
+     .catch(function (val) {
+       alert('CATCH: ' + val);
+     });
+
+
+
+ </script>
+
+}

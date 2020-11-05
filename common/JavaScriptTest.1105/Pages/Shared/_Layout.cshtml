@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="en" onclick="//alert('ho there!');">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - JavaScriptTest</title>
+    <link rel="stylesheet" type="text/css" href="~/css/jstest.css" />
+    @RenderSection("Head", required: false)
+</head>
+<body onclick="//alert('hi there!'); event.stopPropagation(); ">
+    <header>
+      <h1>@ViewData["Title"]</h1>
+    </header>
+    <main>
+      @RenderBody()
+    </main>
+    <footer>
+      &copy; 2020 - JavaScriptTest - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </footer>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
