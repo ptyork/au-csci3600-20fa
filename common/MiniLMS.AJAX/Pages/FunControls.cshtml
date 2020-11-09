@@ -1,0 +1,17 @@
+﻿@page
+@model MiniLMS.Pages.FunControlsModel
+@{
+}
+
+<form method="post">
+  <!-- https://www.learnrazorpages.com/razor-pages/forms/checkboxes -->
+  <input type="checkbox" asp-for="IsAlien" /><label for="IsAlien">&nbsp;I AM AN ALIEN</label>
+  <br />
+  <h3>Favorite Color</h3>
+  <input type="radio" name="FavColor" id="FavColor_red" value="red" /><label for="FavColor_red">Red</label><br />
+  <input type="radio" name="FavColor" id="FavColor_blue" value="blue" /><label for="FavColor_blue">Blue</label><br />
+
+  <br />
+  <input type="submit" />
+
+</form>

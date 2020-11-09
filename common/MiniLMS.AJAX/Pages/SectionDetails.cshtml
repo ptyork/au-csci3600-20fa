@@ -1,0 +1,62 @@
+﻿@page "{id:int}"
+@*@page "/bob/uncle/{id}"*@
+@model MiniLMS.Pages.SectionDetailsModel
+@{
+  ViewData["Title"] = "Section Details";
+
+  var s = Model.Section;
+}
+
+<h1>Section Details</h1>
+
+<table class="table table-info">
+  <tr>
+    <th>
+      Course
+    </th>
+    <td>
+      @s.Course.Prefix @s.Course.Number &mdash; @s.Course.Name
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Letter
+    </th>
+    <td>
+      @s.SectionLetter
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Semester
+    </th>
+    <td>
+      @s.Semester
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Max Students
+    </th>
+    <td>
+      @s.MaxStudents
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Instructor
+    </th>
+    <td>
+      @if (s.Instructor == null)
+      {
+        <text>Unassigned</text>
+        <a href="./AssignInstructor?id=@s.SectionId" class="btn btn-sm btn-primary">Assign</a>
+      }
+      else
+      {
+        <text>@s.Instructor.FullName</text>
+        <a href="./AssignInstructor?id=@s.SectionId" class="btn btn-sm btn-primary">Change</a>
+      }
+    </td>
+  </tr>
+</table>

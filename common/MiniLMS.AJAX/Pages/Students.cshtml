@@ -1,0 +1,47 @@
+﻿@page
+@model MiniLMS.Pages.StudentsModel
+@using MiniLMS.Models
+
+@{
+  ViewData["Title"] = "Students";
+}
+
+<h1>
+  List of Students
+  <a href="./StudentAdd" class="btn btn-primary">Add Student</a>
+</h1>
+
+@foreach (var student in Model.Students)
+{
+  await ShowStudent(student);
+}
+
+@functions
+{
+  // public void ShowStudent(MiniLMS.Models.Course course)
+  public async Task ShowStudent(MiniLMS.Models.Student student)    // Use this syntax if "awaiting" async methods
+  {
+    var student_category = "Undergraduate";
+    if (student.Category == Student.StudentCategory.Graduate)
+      student_category = "Graduate";
+    if (student.Status == Student.StudentStates.AcademicProbation)
+      student_category += " (PROBATION)";
+    if (student.Status == Student.StudentStates.Inactive)
+      student_category += " (INACTIVE)";
+    if (student.HasGraduated)
+      student_category = "Alumnus";
+
+    <div class="student">
+      <h2>
+        @student.FullName &mdash; @student_category
+        <span class="float-md-right">
+          <span class="btn-group">
+            <a asp-page="./StudentDetails" asp-route-id="@student.StudentId" class="btn btn-sm btn-info">Details</a>
+            <a asp-page="./StudentEdit" asp-route-id="@student.StudentId" class="btn btn-sm btn-secondary">Edit</a>
+            <a asp-page="./StudentDelete" asp-route-id="@student.StudentId" class="btn btn-sm btn-danger">Delete</a>
+          </span>
+        </span>
+      </h2>
+   </div>
+  }
+}

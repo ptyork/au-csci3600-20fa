@@ -1,0 +1,89 @@
+﻿@page
+@model IndexModel
+@{
+  ViewData["Title"] = "Courses";
+}
+
+<table>
+  <tr>
+    <th>Is Authenticated</th>
+    <td>@HttpContext.User.Identity.IsAuthenticated</td>
+  </tr>
+  <tr>
+    <th>Claims</th>
+    <td>
+      <ul>
+        @foreach (var claim in HttpContext.User.Claims)
+        {
+          <li>@claim.Type &mdash; @claim.Value</li>
+        }
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <th>Is Admin</th>
+    <td>@HttpContext.User.HasClaim(c => c.Type.ToLower() == "isadmin" && c.Value.ToLower() == "true")</td>
+  </tr>
+</table>
+
+
+<h1>
+  List of Courses
+  <a href="./CourseAdd" class="btn btn-primary">Add Course</a>
+</h1>
+
+@foreach (var course in Model.Courses)
+{
+  ShowCourse(course);
+}
+
+@functions
+{
+  public async Task ShowCourse(MiniLMS.Models.Course course)    // Use this syntax if "awaiting" async methods
+  // public void ShowCourse(MiniLMS.Models.Course course)
+  {
+    <div class="course">
+      <h2>
+        @course.Prefix @course.Number &mdash; @course.Name
+        <span class="float-md-right">
+          <span class="btn-group">
+            <a href="./CourseDetails?id=@course.CourseId" class="btn btn-sm btn-info">Details</a>
+            <a href="./CourseEdit?id=@course.CourseId" class="btn btn-sm btn-secondary">Edit</a>
+            <a href="./CourseDelete?id=@course.CourseId" class="btn btn-sm btn-danger">Delete</a>
+          </span>
+          @if (HttpContext.User.Identity.IsAuthenticated)
+          {
+            <span class="btn-group">
+              <a href="./CourseAddSection?id=@course.CourseId" class="btn btn-sm btn-info">Add Section</a>
+            </span>
+          }
+        </span>
+      </h2>
+      @if (course.Sections?.Count > 0)
+      {
+        <h3>Sections</h3>
+        <ul>
+          @foreach (var sect in course.Sections)
+          {
+            <li>
+              @sect.Semester @sect.SectionLetter
+              @if (sect.Instructor != null)
+              {
+                <text>&mdash; @sect.Instructor.FullName</text>
+              }
+              <span class="btn-group btn-group-sm float-md-right">
+                <a asp-page="./SectionDetails" asp-route-id="@sect.SectionId" class="btn btn-sm btn-info">Details</a>
+                <a href="./SectionEdit?id=@sect.SectionId" class="btn btn-sm btn-secondary">Edit</a>
+                <a href="./SectionDelete?id=@sect.SectionId" class="btn btn-sm btn-danger">Delete</a>
+              </span>
+            </li>
+          }
+        </ul>
+      }
+      else
+      {
+        <h3>No Sections Defined</h3>
+      }
+    </div>
+  }
+}
